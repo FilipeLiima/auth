@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
+
+body {
+  margin: 0;
+  background-color: black;
+  font-family: "Raleway";
+}
+.main-login {
+  width: 100vw;
+  height: 100vg;
+  background: rgb(31, 30, 30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.esquerda {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.esquerda > h1 {
+  color: rgb(98, 194, 250);
+}
+
+.img {
+  width: 35vw;
+}
+
+.direita {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 3vh;
+  color: white;
+}
+h6 {
+  color: white;
+  font-size: 14px;
+}
+
+.card-login {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  background: rgb(46, 45, 45);
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgb(32, 32, 32);
+}
+
+.textfield {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 5px 0px;
+}
+
+.textfield_1 {
+  color: rgb(255, 255, 255);
+}
+
+.textfield > input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: rgb(41, 40, 40);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.textfield > label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.btn-cadastro {
+  width: 100%;
+  font-size: 15px;
+  padding: 16px 0px;
+  margin: 25px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-weight: 700;
+  color: white;
+  background: rgb(21, 147, 219);
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 950px) {
+  .card-login {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-login {
+    flex-direction: column;
+  }
+  .esquerda > h1 {
+    display: none;
+  }
+  .esquerda {
+    width: 100%;
+    height: auto;
+  }
+  .direita {
+    width: 100%;
+    height: auto;
+  }
+}
