@@ -1,14 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 body {
   margin: 0;
   background-color: black;
-  font-family: "Raleway";
 }
 .main-login {
   width: 100vw;
   height: 100vg;
-  background: rgb(31, 30, 30);
+  background: rgb(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,10 +21,17 @@ body {
   flex-direction: column;
 }
 
+h1 {
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
 .esquerda > h1 {
   color: rgb(98, 194, 250);
 }
-
+p {
+  color: white;
+}
 .img {
   width: 35vw;
 }
@@ -54,7 +60,7 @@ h6 {
   align-items: center;
   flex-direction: column;
   padding: 30px 35px;
-  background: rgb(46, 45, 45);
+  background: rgb(34, 34, 34);
   border-radius: 20px;
   box-shadow: 0px 10px 40px rgb(32, 32, 32);
 }
@@ -98,8 +104,8 @@ h6 {
   border-radius: 8px;
   outline: none;
   font-weight: 700;
-  color: white;
-  background: rgb(21, 147, 219);
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
   cursor: pointer;
 }
 
