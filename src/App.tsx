@@ -1,7 +1,7 @@
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Mail } from "lucide-react";
-import { Chrome } from "lucide-react";
+import { Wallet } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 export function App() {
@@ -49,11 +49,11 @@ export function App() {
               <div className="flex justify-between w-full">
                 <Button className="p-5 m-5 bg-black text-white hover:bg-gray-800 w-full ">
                   <Mail className=" w-5 h-5 mr-2" />
-                  Microsoft
+                  Email account
                 </Button>
                 <Button className="p-5 m-5 bg-black text-white hover:bg-gray-800 w-full ">
-                  <Chrome className=" w-5 h-5 mr-2" />
-                  Google
+                  <Wallet className=" w-5 h-5 mr-2" />
+                  Wallet connect
                 </Button>
               </div>
             </div>
