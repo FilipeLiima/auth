@@ -16,4 +16,5 @@ O projeto consiste em uma plataforma de login construída com TypeScript, Tailwi
 - **Ferramentas de Segurança:** bcrypt.js, JWT (JSON Web Tokens) - (EM BREVE)
 - **Outras Ferramentas:** Axios (para requisições HTTP), Git (controle de versão), GitHub (hospedagem de código)
 
-Prévia:
+Prévia:![image](https://github.com/FilipeLiima/auth/assets/131200594/093dc566-3cc9-4b43-b97f-947ee891771b)
+
