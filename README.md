@@ -14,6 +14,10 @@ O projeto consiste em uma plataforma de login construída com TypeScript, Tailwi
 
 ### Roadmap:
 
--**Criação de front end** -**Integração com metamask wallet** -**Criação de página de marketplace e roteamento** -**Criação de smart contracts e hospedagem IPFS** -**Testes e deploy**
+- **Criação de front end**
+- **Integração com metamask wallet**
+- **Criação de página de marketplace e roteamento**
+- **Criação de smart contracts e hospedagem IPFS**
+- **Testes e deploy**
 
 Prévia: ![alt text](image.png)
