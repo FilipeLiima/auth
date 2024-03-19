@@ -23,7 +23,7 @@ O projeto é uma plataforma de locação de imóveis baseada na web 3, incorpora
 
 ### Roadmap:
 
-- **Criação de front end** - Trabalhando nisso
+- **Criação de front end - Login + Marketplace** - Trabalhando nisso
 - **Integração com metamask wallet** - Trabalhando nisso
 - **Criação de página de marketplace e roteamento** - Trabalhando nisso
 - **Criação de smart contracts ERC20 / ERC721, interação com front e hospedagem IPFS**

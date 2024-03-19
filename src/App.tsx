@@ -1,6 +1,7 @@
 import { Button } from "./components/ui/button";
 import { Wallet } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 export function App() {
   const connectToMetaMask = async () => {
@@ -10,6 +11,9 @@ export function App() {
         // Solicita ao usuário que se conecte à sua aplicação usando o MetaMask
         await window.ethereum.request({ method: "eth_requestAccounts" });
         alert("Connected to MetaMask successfully!");
+
+        // Redireciona para a rota "/home" após a conexão bem-sucedida
+        window.location.href = "/home"; // Ou use history.push("/home")
       } catch (error) {
         console.error("Error connecting to MetaMask:", error);
       }
