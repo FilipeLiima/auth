@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; // Importe o componente BrowserRouter
 import { App } from "./App.tsx";
 import "./global.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      {" "}
+      {/* Encapsule o App com BrowserRouter */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
