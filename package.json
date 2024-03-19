@@ -27,7 +27,8 @@
     "shadcn-ui": "^0.8.0",
     "solidity": "^0.0.1",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "web3": "^4.6.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.25",
