@@ -81,12 +81,12 @@ export function Home() {
 
   return (
     <div className="bg-black text-white h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl mb-4 text-bold">CRYPTOHOME</h1>
+      <h1 className="text-4xl mb-4 font-bold">Cryptohome</h1>
       <p className="text-l mb-4">
         Explore a wide range of apartments, houses and other property types
         available for rent
       </p>
-      <p className=" text-purple-500 absolute top-0 right-0 m-5 text-bold ">
+      <p className=" text-purple-500 absolute top-0 right-0 m-5 font-bold ">
         Wallet Connected:{" "}
         {userWalletHash
           ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
