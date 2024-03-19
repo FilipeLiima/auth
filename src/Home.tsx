@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Web3 from "web3"; // Importe a biblioteca web3.js ou ethers.js
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function Home() {
   const [imoveis, setImoveis] = useState<any[]>([]);
@@ -120,12 +132,44 @@ export function Home() {
               ))}
               <li>{imovel.rental_value}</li>
             </ul>
-            <button
-              className="bg-purple-600 text-white py-2 px-4 rounded-md mt-2"
-              onClick={() => handleLocacao(imovel.id)}
-            >
-              Alugar
-            </button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="mt-4 bg-purple-900 text-white font-bold">
+                  Alugar
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Locação</DialogTitle>
+                  <DialogDescription>
+                    Preencha os detalhes da locação abaixo e clique em
+                    "Confirmar Locação".
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="name" className="text-right">
+                      Informe seu nome
+                    </Label>
+                    <Input id="name" value="" className="col-span-3" />
+                  </div>
+
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="periodoLocacao" className="text-right">
+                      Informe o período de Locação (em meses)
+                    </Label>
+                    <Input
+                      id="periodoLocacao"
+                      value=""
+                      className="col-span-3"
+                    />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button type="submit">Confirmar pagamento</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         ))}
       </div>
