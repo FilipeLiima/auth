@@ -69,7 +69,13 @@ export function Home() {
             />
             <p className="text-gray-800">{imovel.description}</p>
             <p className="text-gray-800">Endereço: {imovel.address}</p>
-            {/* Adicione aqui outras informações que você deseja exibir */}
+            {/* Botão de locação */}
+            <button
+              className="bg-purple-600 text-white py-2 px-4 rounded-md mt-2"
+              onClick={() => handleLocacao(imovel.id)} // Substitua 'handleLocacao' pela sua função de locação
+            >
+              Alugar
+            </button>
           </div>
         ))}
       </div>
