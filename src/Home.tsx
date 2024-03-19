@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 export function Home() {
   // Estado para armazenar os dados dos imóveis
   const [imoveis, setImoveis] = useState([]);
+  // Estado para armazenar o valor da busca
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Obter a localização atual para acessar os parâmetros da URL
   const location = useLocation();
@@ -37,10 +39,24 @@ export function Home() {
 
   return (
     <div className="bg-purple-900 text-white h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl mb-4">Marketplace</h1>
+      <h1 className="text-3xl mb-4">Bem vindo ao CryptoHome</h1>
+      <p className="text-l mb-4">
+        Explore uma ampla variedade de opções de apartamentos, casas e outros
+        tipos de propriedades disponíveis para aluguel
+      </p>
       <p className="absolute top-0 right-0 m-5 font-bold">
         Carteira conectada: {userWalletHash}
       </p>
+
+      {/* Barra de busca */}
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Buscar imóveis..."
+        className="bg-white text-gray-800 rounded-md p-2 mb-4"
+        style={{ width: "50%", padding: "0.5rem" }}
+      />
 
       {/* Cards de imóveis */}
       <div className="grid grid-cols-3 gap-4">
