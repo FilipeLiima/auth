@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 
 export function App() {
   const connectToMetaMask = async () => {
-    // Verifica se a MetaMask está instalada
     if (window.ethereum) {
       try {
-        // Solicita ao usuário que se conecte à sua aplicação usando o MetaMask
         await window.ethereum.request({ method: "eth_requestAccounts" });
         alert("Connected to MetaMask successfully!");
 
-        // Redireciona para a rota "/home" após a conexão bem-sucedida
-        window.location.href = "/home"; // Ou use history.push("/home")
+        // Obtém o hash da carteira autenticada
+        const walletHash = "hash_da_carteira_autenticada";
+
+        // Redireciona para a rota "/home" com o hash da carteira como parâmetro de rota
+        window.location.href = `/home?walletHash=${walletHash}`;
       } catch (error) {
         console.error("Error connecting to MetaMask:", error);
       }
