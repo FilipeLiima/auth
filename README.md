@@ -11,9 +11,6 @@ O projeto consiste em uma plataforma de login construída com TypeScript, Tailwi
 ### Tecnologias Utilizadas:
 
 - **Frontend:** TypeScript, Tailwind CSS, Shadn-UI (React.js)
-- **Backend:** Node.js, Express.js (EM BREVE)
-- **Banco de Dados:** MongoDB (EM BREVE)
-- **Ferramentas de Segurança:** bcrypt.js, JWT (JSON Web Tokens) - (EM BREVE)
-- **Outras Ferramentas:** Axios (para requisições HTTP), Git (controle de versão), GitHub (hospedagem de código)
+- **Smart contracts:** (Em Breve)
 
 Prévia: ![alt text](image.png)
