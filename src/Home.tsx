@@ -80,14 +80,14 @@ export function Home() {
   };
 
   return (
-    <div className="bg-purple-900 text-white h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl mb-4">Bem vindo ao CryptoHome</h1>
+    <div className="bg-black text-white h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl mb-4 text-bold">CRYPTOHOME</h1>
       <p className="text-l mb-4">
-        Explore uma ampla variedade de opções de apartamentos, casas e outros
-        tipos de propriedades disponíveis para aluguel
+        Explore a wide range of apartments, houses and other property types
+        available for rent
       </p>
-      <p className="absolute top-0 right-0 m-5 font-bold">
-        Carteira conectada:{" "}
+      <p className=" text-purple-500 absolute top-0 right-0 m-5 text-bold ">
+        Wallet Connected:{" "}
         {userWalletHash
           ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
           : ""}
@@ -97,21 +97,29 @@ export function Home() {
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar imóveis..."
+        placeholder="Search houses..."
         className="bg-white text-gray-800 rounded-md p-2 mb-4"
         style={{ width: "50%", padding: "0.5rem" }}
       />
 
       <div className="grid grid-cols-3 gap-4">
         {imoveis.map((imovel, index) => (
-          <div key={index} className="bg-white p-4 rounded-md">
+          <div key={index} className="bg-gray-800 p-4 rounded-md">
             <img
               src={imovel.image}
               alt={imovel.name}
               className="w-full h-auto mb-2 rounded-md"
             />
-            <p className="text-gray-800">{imovel.description}</p>
-            <p className="text-gray-800">Endereço: {imovel.address}</p>
+            <p className="text-white">{imovel.description}</p>
+            <p className="text-white">Endereço: {imovel.address}</p>
+            <ul className="text-white">
+              {imovel.attributes.map((attribute, attrIndex) => (
+                <li key={attrIndex}>
+                  {attribute.trait_type}: {attribute.value}
+                </li>
+              ))}
+              <li>{imovel.rental_value}</li>
+            </ul>
             <button
               className="bg-purple-600 text-white py-2 px-4 rounded-md mt-2"
               onClick={() => handleLocacao(imovel.id)}
