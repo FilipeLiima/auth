@@ -1,7 +1,7 @@
 {
   "name": "Luxury NYC Penthouse",
-  "address": "157 W 57th St APT 49B, New York, NY 10019",
-  "description": "Luxury Penthouse located in the heart of NYC",
+  "address": "Condominio Horto, 7000, Brazil",
+  "description": "Luxurious mansion with pool and green areas in Brazil ",
   "image": "https://ipfs.io/ipfs/QmQUozrHLAusXDxrvsESJ3PYB3rUeUuBAvVWw6nop2uu7c/2.png",
   "id": "1",
   "attributes": [
@@ -27,11 +27,11 @@
     },
     {
       "trait_type": "Year Built",
-      "value": 2013
+      "value": 2020
     },
     {
       "trait_type": "Rental Value",
-      "value": 5000
+      "value": 4200
     }
   ]
 }
