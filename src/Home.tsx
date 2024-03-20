@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Web3 from "web3"; // Importe a biblioteca web3.js ou ethers.js
+import { ethers } from "ethers"; // Importe a biblioteca ethers.js
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,34 +17,27 @@ import { Label } from "@/components/ui/label";
 export function Home() {
   const [imoveis, setImoveis] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [web3, setWeb3] = useState<Web3 | null>(null);
+  const [web3, setWeb3] = useState<ethers.providers.Web3Provider | null>(null); // Altere para o tipo correto de provedor ethers.js
   const [contract, setContract] = useState<any | null>(null);
-  const [userWalletHash, setUserWalletHash] = useState<string>("");
+  const [userWalletHash, setUserWalletHash] = useState<string>(""); // Inicialize com uma string vazia
   const location = useLocation();
 
   useEffect(() => {
     const connectToBlockchain = async () => {
-      if ((window as any).ethereum) {
+      if (window.ethereum) {
         try {
-          await (window as any).ethereum.request({
+          // Conectar à carteira usando ethers.js
+          const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
-          const web3Instance = new Web3((window as any).ethereum);
-          setWeb3(web3Instance);
-
-          const contractAddress = "SEU_ENDERECO_DO_CONTRATO";
-          const contractABI = SEU_ABI_DO_CONTRATO;
-          const contractInstance = new web3Instance.eth.Contract(
-            contractABI,
-            contractAddress
-          );
-          setContract(contractInstance);
-
-          const selectedAddress =
-            (window as any).ethereum.selectedAddress || "";
+          const selectedAddress = accounts[0];
           setUserWalletHash(selectedAddress);
 
-          // Chamada para obter informações da conta
+          // Inicializar o provedor ethers.js
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          setWeb3(provider);
+
+          // Obter informações da conta
           const userInfo = await fetchUserInfo(selectedAddress);
           console.log("Informações da conta:", userInfo);
         } catch (error) {
@@ -57,6 +50,18 @@ export function Home() {
 
     connectToBlockchain();
   }, []);
+
+  // Função para buscar informações da conta
+  const fetchUserInfo = async (address: string) => {
+    try {
+      const response = await fetch(`/api/account-info?address=${address}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro ao buscar informações da conta:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const fetchImoveis = async () => {
