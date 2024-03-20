@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ethers } from "ethers";
 import { Button } from "@/components/ui/button";
-import { AudioLines } from "lucide-react";
+import { PackageCheck } from "lucide-react";
 import { BadgeCheck } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -110,20 +111,19 @@ export function Home() {
       </p>
       <p className="text-white absolute top-0 right-0 m-5">
         <span className="font-bold flex items-center">
-          <AudioLines className="mr-1" />
+          <PackageCheck className="text-purple-400 mr-1" />
           Wallet Connected:{" "}
           {userWalletHash
             ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
             : ""}
         </span>{" "}
       </p>
-
       <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search houses..."
-        className="bg-white text-gray-800 rounded-md p-2 mb-4"
+        className="bg-white text-gray-800 rounded-md p-2 mb-4 pl-10" // Adicionei pl-10 para ajustar o espaçamento à esquerda
         style={{ width: "50%", padding: "0.5rem" }}
       />
 
@@ -165,22 +165,18 @@ export function Home() {
                     <Label htmlFor="name" className="text-right">
                       Provide your name
                     </Label>
-                    <Input id="name" value="" className="col-span-3" />
+                    <Input id="name" className="col-span-3" />
                   </div>
 
                   <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="periodoLocacao" className="text-right">
                       Enter the rental period (in months)
                     </Label>
-                    <Input
-                      id="periodoLocacao"
-                      value=""
-                      className="col-span-3"
-                    />
+                    <Input id="periodoLocacao" className="col-span-3" />
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button type="submit">Confirmar pagamento</Button>
+                  <Button type="submit">Confirm Payment</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
