@@ -106,8 +106,8 @@ export function Home() {
         Explore a wide range of apartments, houses and other property types
         available for rent
       </p>
-      <p className=" text-purple-500 absolute top-0 right-0 m-5 font-bold ">
-        Wallet Connected:{" "}
+      <p className="text-purple-500 absolute top-0 right-0 m-5">
+        <span className="font-bold">Wallet Connected:</span>{" "}
         {userWalletHash
           ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
           : ""}
