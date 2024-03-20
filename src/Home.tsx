@@ -25,7 +25,6 @@ export function Home() {
   useEffect(() => {
     const connectToBlockchain = async () => {
       if ((window as any).ethereum) {
-        // Usando type assertion para indicar que 'ethereum' existe em 'window'
         try {
           await (window as any).ethereum.request({
             method: "eth_requestAccounts",
@@ -44,6 +43,10 @@ export function Home() {
           const selectedAddress =
             (window as any).ethereum.selectedAddress || "";
           setUserWalletHash(selectedAddress);
+
+          // Chamada para obter informações da conta
+          const userInfo = await fetchUserInfo(selectedAddress);
+          console.log("Informações da conta:", userInfo);
         } catch (error) {
           console.error("Erro ao conectar ao MetaMask:", error);
         }
