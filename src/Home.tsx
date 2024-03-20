@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { ethers } from "ethers"; // Importe a biblioteca ethers.js
+import { ethers } from "ethers";
 import { Button } from "@/components/ui/button";
+import { AudioLines } from "lucide-react";
+import { BadgeCheck } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -106,11 +108,14 @@ export function Home() {
         Explore a wide range of apartments, houses and other property types
         available for rent
       </p>
-      <p className="text-purple-500 absolute top-0 right-0 m-5">
-        <span className="font-bold">Wallet Connected:</span>{" "}
-        {userWalletHash
-          ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
-          : ""}
+      <p className="text-white absolute top-0 right-0 m-5">
+        <span className="font-bold flex items-center">
+          <AudioLines className="mr-1" />
+          Wallet Connected:{" "}
+          {userWalletHash
+            ? userWalletHash.slice(0, 8) + "..." + userWalletHash.slice(-6)
+            : ""}
+        </span>{" "}
       </p>
 
       <input
@@ -143,28 +148,29 @@ export function Home() {
             <Dialog>
               <DialogTrigger asChild>
                 <Button className="mt-4 bg-purple-900 text-white font-bold">
-                  Alugar
+                  <BadgeCheck className="mr-1" />
+                  RENT
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle>Locação</DialogTitle>
+                  <DialogTitle>Location</DialogTitle>
                   <DialogDescription>
-                    Preencha os detalhes da locação abaixo e clique em
-                    "Confirmar Locação".
+                    Fill in the rental details below and click "Confirm
+                    Payment".
                   </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="name" className="text-right">
-                      Informe seu nome
+                      Provide your name
                     </Label>
                     <Input id="name" value="" className="col-span-3" />
                   </div>
 
                   <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="periodoLocacao" className="text-right">
-                      Informe o período de Locação (em meses)
+                      Enter the rental period (in months)
                     </Label>
                     <Input
                       id="periodoLocacao"
