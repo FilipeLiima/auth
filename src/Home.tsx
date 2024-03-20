@@ -17,30 +17,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// Definições das variáveis do contrato ERC20
+//const tokenAddress = "0x123..."; // Substitua pelo endereço do contrato do token ERC20
+//const tokenAbi = [...]; // Substitua pelos ABI do contrato do token ERC20
+//const receiverAddress = "0x456..."; // Substitua pelo endereço do destinatário da transação
+
 export function Home() {
   const [imoveis, setImoveis] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [web3, setWeb3] = useState<ethers.providers.Web3Provider | null>(null); // Altere para o tipo correto de provedor ethers.js
+  const [web3, setWeb3] = useState<ethers.providers.Web3Provider | null>(null);
   const [contract, setContract] = useState<any | null>(null);
-  const [userWalletHash, setUserWalletHash] = useState<string>(""); // Inicialize com uma string vazia
+  const [userWalletHash, setUserWalletHash] = useState<string>("");
   const location = useLocation();
 
   useEffect(() => {
     const connectToBlockchain = async () => {
       if (window.ethereum) {
         try {
-          // Conectar à carteira usando ethers.js
           const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           const selectedAddress = accounts[0];
           setUserWalletHash(selectedAddress);
 
-          // Inicializar o provedor ethers.js
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           setWeb3(provider);
 
-          // Obter informações da conta
           const userInfo = await fetchUserInfo(selectedAddress);
           console.log("Informações da conta:", userInfo);
         } catch (error) {
@@ -54,7 +56,6 @@ export function Home() {
     connectToBlockchain();
   }, []);
 
-  // Função para buscar informações da conta
   const fetchUserInfo = async (address: string) => {
     try {
       const response = await fetch(`/api/account-info?address=${address}`);
@@ -99,6 +100,43 @@ export function Home() {
     } catch (error) {
       console.error("Erro ao alugar imóvel:", error);
       alert("Erro ao alugar imóvel. Consulte o console para mais detalhes.");
+    }
+  };
+
+  const handleConfirmPayment = async (rentalValue: number) => {
+    try {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const selectedAddress = accounts[0];
+
+        const tokenContract = new ethers.Contract(
+          tokenAddress,
+          tokenAbi,
+          web3.getSigner()
+        );
+
+        const transaction = await tokenContract.transfer(
+          receiverAddress,
+          rentalValue
+        );
+
+        const transactionReceipt = await transaction.wait();
+
+        if (transactionReceipt.status === 1) {
+          alert("Pagamento concluído com sucesso!");
+        } else {
+          alert("Transação falhou. Por favor, tente novamente.");
+        }
+      } else {
+        alert("Por favor, instale o MetaMask para prosseguir com o pagamento.");
+      }
+    } catch (error) {
+      console.error("Erro ao conectar ao MetaMask:", error);
+      alert(
+        "Ocorreu um erro ao conectar ao MetaMask. Por favor, tente novamente."
+      );
     }
   };
 
@@ -176,7 +214,18 @@ export function Home() {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button type="submit">Confirm Payment</Button>
+                  <Button
+                    type="submit"
+                    onClick={() =>
+                      handleConfirmPayment(
+                        imovel.attributes.find(
+                          (attr) => attr.trait_type === "Rental Value"
+                        )?.value
+                      )
+                    }
+                  >
+                    Confirm Payment
+                  </Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
