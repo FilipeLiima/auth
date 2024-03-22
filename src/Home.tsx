@@ -17,39 +17,59 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-// Definições das variáveis do contrato ERC20
-//const tokenAddress = "0x123..."; // Substitua pelo endereço do contrato do token ERC20
-//const tokenAbi = [...]; // Substitua pelos ABI do contrato do token ERC20
-//const receiverAddress = "0x456..."; // Substitua pelo endereço do destinatário da transação
+// Importar o contrato ERC20 e ERC721
+import tokenAbi from "../smart-contracts/abis/ERC20.json";
+import ERC721Abi from "../smart-contracts/abis/ERC721.json";
 
 export function Home() {
   const [imoveis, setImoveis] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [web3, setWeb3] = useState<ethers.providers.Web3Provider | null>(null);
-  const [contract, setContract] = useState<any | null>(null);
+  const [tokenContract, setTokenContract] = useState<any | null>(null); // Variável para o contrato ERC20
+  const [nftContract, setNftContract] = useState<any | null>(null); // Variável para o contrato ERC721
   const [userWalletHash, setUserWalletHash] = useState<string>("");
   const location = useLocation();
 
   useEffect(() => {
     const connectToBlockchain = async () => {
-      if (window.ethereum) {
-        try {
+      const localRPC = "http://127.0.0.1:8545"; // Defina o endereço do RPC local
+      const provider = new ethers.providers.JsonRpcProvider(localRPC); // Configura o provedor Web3 para se conectar ao RPC local
+
+      try {
+        if (window.ethereum) {
           const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           const selectedAddress = accounts[0];
           setUserWalletHash(selectedAddress);
 
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          setWeb3(provider);
+          setWeb3(provider); // Define o provedor Web3 para a instância fornecida
 
           const userInfo = await fetchUserInfo(selectedAddress);
           console.log("Informações da conta:", userInfo);
-        } catch (error) {
-          console.error("Erro ao conectar ao MetaMask:", error);
+
+          // Instanciar o contrato ERC20
+          const tokenAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Substitua pelo endereço do contrato do token ERC20
+          const tokenContract = new ethers.Contract(
+            tokenAddress,
+            tokenAbi,
+            provider.getSigner()
+          );
+          setTokenContract(tokenContract);
+
+          // Instanciar o contrato ERC721
+          const nftAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Substitua pelo endereço do contrato do token ERC721
+          const nftContract = new ethers.Contract(
+            nftAddress,
+            ERC721Abi,
+            provider.getSigner()
+          );
+          setNftContract(nftContract);
+        } else {
+          alert("Por favor, instale o MetaMask para se conectar.");
         }
-      } else {
-        alert("Por favor, instale o MetaMask para se conectar.");
+      } catch (error) {
+        console.error("Erro ao conectar à blockchain:", error);
       }
     };
 
@@ -89,13 +109,14 @@ export function Home() {
   }, []);
 
   const handleLocacao = async (id: string) => {
-    if (!web3 || !contract) {
+    if (!web3 || !nftContract) {
       alert("Por favor, conecte-se à blockchain primeiro.");
       return;
     }
 
     try {
-      await contract.methods.locarImovel(id).send({ from: userWalletHash });
+      // Chamar a função apropriada do contrato ERC721 para alugar o imóvel
+      await nftContract.rentToken(id);
       alert("Locação bem-sucedida!");
     } catch (error) {
       console.error("Erro ao alugar imóvel:", error);
@@ -105,24 +126,22 @@ export function Home() {
 
   const handleConfirmPayment = async (rentalValue: number) => {
     try {
+      if (!web3 || !tokenContract || !nftContract) {
+        alert("Por favor, conecte-se à blockchain primeiro.");
+        return;
+      }
+
       if (window.ethereum) {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         const selectedAddress = accounts[0];
 
-        const tokenContract = new ethers.Contract(
-          tokenAddress,
-          tokenAbi,
-          web3.getSigner()
-        );
+        // Aprovar a transferência de tokens
+        await tokenContract.approve(nftContract.address, rentalValue);
 
-        const transaction = await tokenContract.transfer(
-          receiverAddress,
-          rentalValue
-        );
-
-        const transactionReceipt = await transaction.wait();
+        // Executar o pagamento
+        const transactionReceipt = await nftContract.payRent(rentalValue);
 
         if (transactionReceipt.status === 1) {
           alert("Pagamento concluído com sucesso!");
@@ -139,7 +158,6 @@ export function Home() {
       );
     }
   };
-
   return (
     <div className="bg-black text-white h-screen flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-4 font-bold">Cryptohome</h1>
@@ -161,7 +179,7 @@ export function Home() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search houses..."
-        className="bg-white text-gray-800 rounded-md p-2 mb-4 pl-10" // Adicionei pl-10 para ajustar o espaçamento à esquerda
+        className="bg-white text-gray-800 rounded-md p-2 mb-4 pl-10"
         style={{ width: "50%", padding: "0.5rem" }}
       />
 
