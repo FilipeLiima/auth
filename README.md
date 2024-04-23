@@ -26,8 +26,8 @@ O projeto é uma plataforma de locação de imóveis baseada na web 3, incorpora
 - **Criação de front end - Login + Marketplace** - Implementado
 - **Integração com metamask wallet** - Implementado
 - **Criação de página de marketplace e roteamento** - Implementado
-- **Criação de smart contracts ERC20 / ERC721, interação com front e hospedagem IPFS** - Trabalhando nisso: https://github.com/FilipeLiima/smart-contracts
-- **Testes e deploy de contratos** - Em breve
+- **Criação de smart contracts ERC20 / ERC721, interação com front e hospedagem IPFS** - Trabalhando nisso rep: https://github.com/FilipeLiima/smart-contracts
+- **Testes e deploy de contratos** - Trabalhando nisso rep: https://github.com/FilipeLiima/smart-contracts
 
 Arquitetura: ![alt text](image-4.png)
 
